@@ -3,7 +3,7 @@ terraform {
     resource_group_name  = "chatbot-170-tfstate-rg"
     storage_account_name = "chatbot170tfstatestor"
     container_name       = "tfstate"
-    key                  = "tf0.11.3.tfstate"
+    key                  = "tf0.11.4.tfstate"
   }
 }
 

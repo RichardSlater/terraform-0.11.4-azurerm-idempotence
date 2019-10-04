@@ -8,13 +8,13 @@ terraform {
 }
 
 resource "azurerm_resource_group" "dev" {
-  name     = "amido-uks-cb170-rg-bot-dev"
-  location = "UK South"
+  name     = "${var.resource_group_name}"
+  location = "${var.location}"
 }
 
 resource "azurerm_key_vault" "dev" {
-  name                = "amido-uks-cb170-kv-dev"
-  location            = "UK South"
+  name                = "${var.key_vault_name}"
+  location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.dev.name}"
 
   sku {
@@ -25,7 +25,7 @@ resource "azurerm_key_vault" "dev" {
 
   access_policy {
     tenant_id = "${var.aad_tenant_id}"
-    object_id = "192a13e7-fa31-4ee1-9e1a-f7c46c9a82b6"
+    object_id = "${var.user_object_id}"
 
     key_permissions = []
 
@@ -40,7 +40,7 @@ resource "azurerm_key_vault" "dev" {
 }
 
 resource "azurerm_storage_account" "dev" {
-  name                     = "amidoukscb170"
+  name                     = "${var.storage_acct_name}"
   resource_group_name      = "${azurerm_resource_group.dev.name}"
   location                 = "${azurerm_resource_group.dev.location}"
   account_tier             = "Standard"
